@@ -1,16 +1,30 @@
-
-export default function(state = initialState, action) {
-  console.log("anything pls");
-    switch (action.type) {
-        case 'ADD_BOOK':
-            console.log("does it work");
-            console.log(state.concat([action.payload]));
-            return state.concat([action.payload]);
-    }
-    return state;
+const todo = (state, action) => {
+  switch (action.type) {
+    case action.type:
+      return {
+        title: action.payload.title,
+        pages: action.payload.pages
+      }
+    default:
+      return state;
+  }
 }
 
-const  initialState =
+export default function(state = initialState, action) {
+    switch (action.type) {
+        case 'ADD_BOOK':
+            console.log("reducer: ");
+            console.log(state.concat([action.payload]));
+            return [
+              ...state,
+              todo(undefined, action)
+            ];
+        default:
+            return state;
+    }
+}
+
+const initialState =
     [
         { title: 'Javascript: The Good Parts', pages: 101 },
         { title: 'Harry Potter', pages: 39 },

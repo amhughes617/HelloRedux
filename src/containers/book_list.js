@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { selectBook } from '../actions/index';
+import { selectBook, addBook } from '../actions/index';
 import { bindActionCreators } from 'redux'; //used to make sure action generated flows through all reducers
+import InputForm from '../components/add_book';
 
 class BookList extends Component {
 
     renderList() {
         return this.props.books.map((book) => {
+          console.log(book);
             return (
                 <li onClick={() => this.props.selectBook(book)}
                   key={ book.title }
@@ -18,11 +20,15 @@ class BookList extends Component {
     }
 
     render() {
+      const addBook = (book) => {this.props.addBook(book)};
         return (
+          <div>
+            <InputForm onSubmit={addBook} />
             <ul className="list-group col-sm-4">
-                {this.renderList()}
+              {this.renderList()}
             </ul>
-        )
+          </div>
+        );
     }
 }
 
@@ -37,7 +43,7 @@ function mapStateToProps(state) {
 // Anything returned from this function will end up as props on the BookList container
 function mapDispatchToProps(dispatch) {
     // Whenever selectBook is called the result should be passed to all reducers
-    return bindActionCreators({ selectBook: selectBook }, dispatch);
+    return bindActionCreators({ selectBook: selectBook, addBook: addBook }, dispatch);
 }
 
 

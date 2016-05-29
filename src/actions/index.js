@@ -10,7 +10,7 @@ export function addBook(book) {
   if (!book) {
     return;
   }
-  console.log("payload: " + book);
+  console.log("action: " + book);
     return {
         type: 'ADD_BOOK',
         payload: book
